@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetch</title>
+
+  <style>
+    label {
+      display: block;
+    }
+
+    button {
+      display: block;
+    }
+
+    form {
+      position: relative;
+    }
+
+    .search {
+      position: absolute;
+      top: 18px;
+      left: 176px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <form action="" id="form-endereco">
+    <label for="cep">CEP:</label>
+    <input type="text" name="cep" id="cep" autocomplete="off">
+    <label for="endereco">Endereço:</label>
+    <input type="text" name="endereco" id="endereco">
+    <label for="bairro">Bairro:</label>
+    <input type="text" name="bairro" id="bairro">
+    <label for="cidade">Cidade:</label>
+    <input type="text" name="cidade" id="cidade">
+    <label for="uf">Estado:</label>
+    <input type="text" name="uf" id="uf">
+
+    <button class="search" type="submit">Buscar</button>
+    <br><br>
+    <button type="reset">Limpar</button>
+
+
+    <h2>Valor de compra do Bitcoin</h2>
+    <h3 data-valor=""></h3>
+
+    <h2>Piada Aleatório Chuck Norris</h2>
+    <p data-piada=""></p>
+    <button data-gerar="" type="button">Próxima piada</button>
+
+  </form>
+
+
+  <script src="scripts.js"></script>
+</body>
+
+</html>
