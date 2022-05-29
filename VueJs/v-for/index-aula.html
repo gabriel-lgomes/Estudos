@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V-for</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <ul>
+      <li v-for="item in lista">{{item}}</li>
+    </ul>
+    <button @click="removerItem">Remover</button>
+    <button @click="mudarItem">Mudar</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        lista: ["Item 1", "Item 2", "Item 3"]
+      },
+      methods: {
+        removerItem() {
+          this.lista.pop(); // Ativa reatividade
+        },
+        mudarItem() {
+          this.lista[0] = "Banana"; // Não ativa reatividade
+          this.$set(this.lista, 0, "Banana"); //Ativa reatividade
+        }
+      }
+    });
+  </script>
+
+</body>
+
+</html>

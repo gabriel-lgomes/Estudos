@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computed e Watch</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <h1>COMPUTED</h1>
+    <p>Quando precisamos modificar um dado usando JavaScript, podemos utilizar uma propriedade dentro de computed.</p>
+    <p v-for="carro in carrosAzuis">{{carro.marca}}</p>
+
+    <hr style="margin: 20px 0;">
+    <h1>WATCH</h1>
+    <p>É possível ativar uma função toda vez que um dado reativo é modificado. Para isso usamos uma propriedade dentro
+      de watch.</p>
+    <p>{{contador}}</p>
+    <button @click="contador++">Adicionar</button>
+
+    <hr style="margin: 20px 0;">
+    <h1>WATCH ASSINCRONO</h1>
+    <p>O watch se diferencia do computed principalmente pela sua capacidade de receber eventos assincronos.</p>
+
+    <input type="text" v-model="cep" placeholder="Cep" maxlength="8" />
+    <ul>
+      <li v-for="(valor, chave) in endereco">{{chave}}: {{valor}}</li>
+    </ul>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        contador: 0,
+        carros: [
+          {
+            marca: "VW",
+            cor: "Azul"
+          },
+          {
+            marca: "Ford",
+            cor: "Preto"
+          },
+          {
+            marca: "Tesla",
+            cor: "Azul"
+          }
+        ],
+        cep: "",
+        endereco: {}
+      },
+      computed: {
+        carrosAzuis() {
+          return this.carros.filter(({ cor }) => cor === "Azul");
+        }
+      },
+      watch: {
+        contador() {
+          console.log(this.contador);
+        },
+        cep(valor) {
+          if (valor.length === 8) {
+            fetch(`https://viacep.com.br/ws/${valor}/json/`)
+              .then(r => r.json())
+              .then(r => {
+                this.endereco = r;
+              });
+          }
+        },
+      }
+    });
+  </script>
+
+</body>
+
+</html>

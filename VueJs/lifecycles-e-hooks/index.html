@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lifecycles e Hooks</title>
+
+  <style>    
+  </style>
+
+</head>
+
+<body>
+
+  <div id="app"> 
+    <ul>
+      <li v-for="(value, key) in github">
+        {{key}}: {{value}} 
+      </li>
+    </ul> 
+    <button @click="contador++">contador {{contador}}</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        github: {},
+        contador: 0, 
+      }, 
+      methods: {
+        getGithub() {
+          fetch('https://api.github.com/users/gabriel-lgomes')
+            .then(r => r.json())
+            .then(r => {
+              this.github = r;
+            })
+        }
+      },
+      created() {
+        this.getGithub();
+      },
+      updated() {
+        document.title = this.contador;
+      }
+    }); 
+  </script> 
+  <!-- Utilize a api do github para
+    mostrar todos os seus dados na tela.
+    Faça o fetch das informações utilizando
+    um dos hooks do vue:
+
+    https://api.github.com/users/origamid (utilize o seu usuário)
+  -->
+
+  <!-- 
+    Crie um contador, onde seja possível clicar em
+    um botão e adicionar +1 ao número.
+
+    Toda vez que o contador mudar, mude o título da página
+    para o total do contador. Utilize um hook para isso
+  --> 
+</body>
+
+</html>

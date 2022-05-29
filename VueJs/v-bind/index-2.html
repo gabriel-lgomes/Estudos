@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V-on</title>   
+
+  <style>
+    .verde {
+      color: green;
+    }
+    .vermelho {
+      color: red;
+    }
+
+  </style>
+
+</head>
+
+<body>   
+  <div id="app">   
+
+    <h1>Comparativo de marketCap de empresas</h1> 
+
+    <div style="padding: 20px 0;">
+      <form action="">
+        <input v-model="firstCompany" type="text" name="firstCompany" placeholder="Cole a api da primeira empresa">
+        <input v-model="secondCompany" type="text" name="secondCompany" placeholder="Cole a api da segunda empresa"> 
+      </form>
+    </div>  
+
+    <div v-for="(company, index) in companys">
+      <p>Nome da empresa: {{ company.companyName }} <br> Valor de Mercado: <span :class="verdadeiro ? 'verde' : 'vermelho' ">{{ company.marketCap }}</span> </p> 
+    </div> 
+
+    <button @click="getCompany">Puxar dados</button>
+  </div>   
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        firstCompany: '',
+        secondCompany: '',
+        companys: [],
+        verdadeiro: '',  
+      },
+      methods: {
+        fetchCompany(api) {
+          fetch(api)
+            .then(r => r.json())
+            .then(json => {
+              this.companys.push(json); 
+            }).catch(erro => {
+              console.log(Error(erro))
+            });
+        },
+        getCompany() {
+          this.fetchCompany(this.firstCompany);
+          this.fetchCompany(this.secondCompany); 
+          this.verdadeiro = this.companys;   
+        }
+      },
+      computed: {                
+      },
+      watch: {
+        
+      }
+    }); 
+
+  </script> 
+
+</body>
+
+</html>

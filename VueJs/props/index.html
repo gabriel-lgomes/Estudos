@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Props</title>
+
+  <style>
+  </style>
+
+</head>
+
+<body>
+
+  <div id="app"> 
+    <empresas></empresas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script>
+
+    const Acoes = {
+      name: "Acoes",
+      props: ["acao"],
+      template: `
+        <ul>
+          <li v-for="(value, key) in acao" :key="value + key">
+            {{key}}: {{value}}
+          </li>
+        </ul>
+      `
+    }
+
+    const Empresas = {
+      name: "Empresas",
+      data() {
+        return {
+          simbolo: "",
+          quote: {},
+        }
+      },
+      components: {
+        Acoes,
+      },
+      template: `
+        <div>
+          <input type="text" name="simbolo" v-model="simbolo" placeholder="Simbolo da empresa">
+          <button @click="fetchAcoes">Puxar ações</button>
+          <acoes :acao="quote"></acoes>
+        </div>
+      `,
+      methods: {
+        fetchAcoes() {
+          fetch(`https://api.origamid.dev/stock/${this.simbolo}/quote`)
+            .then(r => r.json())
+            .then(r => {
+              this.quote = r;
+            }).catch(erro => {
+              console.log(Error(erro));
+            });
+        }
+      }
+    }
+
+    const vm = new Vue({
+      el: '#app', 
+      components: {
+        Empresas,
+      },
+    });
+  </script>
+  <!-- 
+    Crie um componente com um campo de input e um botão para enviar o valor.
+    Nesse campo de input será possível escrever o simbolo de empresas americanas
+
+    simbolos ex:
+    aapl -> Apple
+    goog -> Google
+    msft -> Microsoft
+    amzn -> Amazon
+    fb -> Facebook
+
+    Ao clicar no botão, faça um fetch com a API:
+    https://api.origamid.dev/stock/${SIMBOLO}/quote
+
+    O resultado do fetch deverá ser mostrado em um componente filho do formulário.
+    Envia as informações utilizando prop
+  
+    Mostre todas as informações do fetch utilizando um loop.
+  -->
+</body>
+
+</html>

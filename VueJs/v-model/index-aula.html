@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V-model</title>
+  <style>
+    body {
+      padding: 40px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+    <h1>V-MODEL </h1>
+    <p>É utilizado para tornar reativo o conteúdo de formulários. Chamado de two-way data binding.</p>
+    <input v-model="nome" placeholder="nome" /> <br>
+    <textarea v-model="mensagem" placeholder="mensagem"></textarea>
+    <p>{{nome}}</p>
+    <p>{{mensagem}}</p>
+
+    <hr style="margin: 20px 0;">
+    <h1>TWO-WAY VS ONE-WAY </h1>
+    <p>Por padrão todo o conteúdo do Vue.js é one-way, isso significa que mudança no JavaScript criam mudanças no DOM.
+      Já no two-way, tanto mudanças no dom como no JavaScript, mudam o conteúdo. </p>
+    <input v-model="texto" placeholder="texto" /> <br>
+    <input :value="texto" placeholder="texto" />
+    <p>{{texto}}</p>
+
+    <hr style="margin: 20px 0;">
+    <h1>CHECKBOX</h1>
+    <p>Retorna um valor false ou true.</p>
+    <input type="checkbox" v-model="receberEmail" id="receberEmail" />
+    <label for="receberEmail">Receber Email</label><br />
+    <input type="checkbox" v-model="termos" id="termos" />
+    <label for="termos">Termos e Condições</label>
+
+    <p>receberEmail: {{receberEmail}}</p>
+    <p>termos: {{termos}}</p>
+
+    <hr style="margin: 20px 0;">
+    <h1>RADIO </h1>
+    <p>Retorna o valor do campo seleciona.</p>
+    <input type="radio" v-model="cor" value="Azul" id="azul" />
+    <label for="azul">Azul</label><br />
+    <input type="radio" v-model="cor" value="Vermelho" id="vermelho" />
+    <label for="vermelho">Vermelho</label>
+
+    <p>cor: {{cor}}</p>
+
+    <hr style="margin: 20px 0;">
+    <h1>SELECT</h1>
+    <p>É importante colocar uma opção inicial desabilitada com valor vazio, para resolver um bug no IOS.</p>
+    <select v-model="fruta">
+      <option disabled value="">Selecione uma fruta</option>
+      <option value="banana">Banana</option>
+      <option value="morango">Morango</option>
+      <option value="uva">Uva</option>
+    </select>
+    <p>fruta: {{fruta}}</p>
+
+    <hr style="margin: 20px 0;">
+    <h1>MODIFIERS</h1>
+    <p>Com o .lazy, a reatividade só acontecendo ao change (quando o usuário muda de campo). O .number irá
+      automaticamente transformar o input em número e não string. O .trim automaticamente elimina espaços em branco</p>
+    <textarea v-model.lazy="mensagem2" placeholder="mensagem"></textarea> <br>
+    <input v-model.number="total" placeholder="Total" /> <br>
+    <input v-model.trim="email" placeholder="Email" />
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        nome: "",
+        mensagem: "",
+        texto: "",
+        receberEmail: true,
+        termos: false,
+        cor: "",
+        fruta: "",
+        mensagem2: "",
+        total: 0,
+        email: ""
+
+      },
+    });
+  </script>
+
+</body>
+
+</html>

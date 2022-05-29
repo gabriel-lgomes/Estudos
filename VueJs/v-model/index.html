@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V-model</title>
+
+  <style>
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    button {
+      display: block;
+      margin-top: 10px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div id="app">
+    <form action="">
+      <label for="width">width</label>
+      <input type="text" name="width" v-model="btn.width" placeholder="width">
+      <label for="height">height</label>
+      <input type="text" name="height" v-model="btn.height" placeholder="height">
+      <label for="fontSize">font-size</label>
+      <input type="text" name="fontSize" v-model="btn.fontSize" placeholder="fontSize">
+      <label for="fontFamily">font-family</label>
+      <input type="text" name="fontFamily" v-model="btn.fontFamily" placeholder="fontFamily">
+      <label for="textAlign">text-align</label>
+      <input type="text" name="textAlign" v-model="btn.textAlign" placeholder="textAlign">
+      <label for="background">background</label>
+      <input type="color" name="background" v-model="btn.background" placeholder="background">
+      <label for="color">color</label>
+      <input type="color" name="color" v-model="btn.color" placeholder="color">
+      <label for="borderRadius">border-radius</label>
+      <input type="text" name="borderRadius" v-model="btn.borderRadius" placeholder="borderRadius">
+      <button :style="btn">Botão gerado</button>
+    </form>
+
+    <hr style="margin-top: 40px;">
+    <form action="">
+      <label for="nome">Nome: </label>
+      <input type="text" name="nome" placeholder="nome" v-model.lazy="nome">
+      <label for="email">Email: </label>
+      <input type="text" name="email" placeholder="email" v-model.lazy="email">
+      <label for="telefone">Telefone: </label>
+      <input type="text" name="telefone" placeholder="telefone" v-model.lazy="telefone">
+      <label for="mensagem">Mensagem: </label>
+      <textarea name="mensagem" id="mensagem" placeholder="mensagem" v-model.lazy="mensagem"></textarea>
+      <button @click.prevent="mostrarDados">Enviar</button>
+    </form>
+
+    <ul>
+      <li v-for="(value, key) in dados">
+        {{key}}: {{value}}
+      </li>
+    </ul>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        btn: {
+          width: "100px",
+          height: "50px",
+          fontSize: "",
+          fontFamily: "",
+          textAlign: "",
+          background: "",
+          color: "",
+          borderRadius: "0px",
+        },
+        nome: "",
+        email: "",
+        telefone: "",
+        mensagem: "",
+        dados: {},
+      },
+      methods: {
+        mostrarDados() {
+          this.dados = {
+            nome: this.nome,
+            email: this.email,
+            telefone: this.telefone,
+            mensagem: this.mensagem
+          }
+        }
+      }
+    }); 
+  </script>
+
+  <!-- 
+    1 - Crie um criador de botões.
+
+    O usuário poderá definir:
+    width,
+    height,
+    font-size,
+    font-family,
+    text-align,
+    background,
+    color,
+    border-radius,
+
+    As escolhas serão feitas em campos de
+    formulário. Cada escolha deverá ser 
+    refletida em um elemento (o botão).
+
+
+    2 - Crie um formulário com, nome, email, telefone e mensagem.
+    Ao clicar em enviar, as informações preenchidas no formulário
+    devem aparecer abaixo do mesmo. (previna o comportamento padrão do botão enviar)
+  -->
+</body>
+
+</html>

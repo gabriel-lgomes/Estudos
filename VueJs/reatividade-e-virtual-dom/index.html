@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reatividade e virtual DOM</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <p>Bermudas - R$ <span>{{preco}}</span></p>
+    <button @click="total++">Adicionar</button>
+    <button @click="total--">Remover</button>
+    <span>{{total}}</span>
+    <p>Total: <span>{{total * preco}}</span></p>
+    <h1>{{ teste }}</h1>
+  </div>
+
+  <div>
+    <p>Camisas - R$ <span class="preco">49</span></p>
+    <button class="adicionar">Adicionar</button>
+    <button class="remover">Remover</button>
+    <span class="total">0</span>
+    <p>Total: <span class="precoTotal"></span></p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+  <script>
+    // COM VUEJS
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        preco: 49,
+        total: 0,
+        teste: 0,
+      },
+      methods: {
+      },
+    });
+
+    // SEM VUEJS
+    const dados = {
+      preco: 49,
+      total: 0
+    };
+
+    const adicionar = document.querySelector(".adicionar");
+    const remover = document.querySelector(".remover");
+    const preco = document.querySelector(".preco");
+    const total = document.querySelector(".total");
+    const precoTotal = document.querySelector(".precoTotal");
+
+    preco.innerText = dados.preco;
+    total.innerText = dados.total;
+    precoTotal.innerText = dados.total * dados.preco;
+
+    function atualizarUI() {
+      total.innerText = dados.total;
+      precoTotal.innerText = dados.total * dados.preco;
+    }
+
+    function incrementar() {
+      dados.total++;
+      atualizarUI();
+    }
+
+    function diminuir() {
+      dados.total--;
+      atualizarUI();
+    }
+
+    adicionar.addEventListener("click", incrementar);
+    remover.addEventListener("click", diminuir);
+
+  </script>
+
+</body>
+
+</html>

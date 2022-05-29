@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Methods</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <h1>METHODS</h1>
+    <p>Métodos podem ser criados para serem utilizados na instância e também em diretivas. Lembrando que métodos são funções.    </p>
+    <p>{{contador}}</p>
+    <button @click="incrementar">Incrementar</button>
+    <button @click="diminuir">Diminuir</button>
+    <br>
+    <hr>
+    <h1>PARÂMETROS E ARGUMENTOS    </h1>
+    <p>Podemos utilizar parâmetros dentro dos métodos.    </p>
+    <p>{{compra}}</p>
+    <button @click="mudarCompra('Guitarra')">Guitarra</button>
+    <button @click="mudarCompra('Violão')">Violão</button>
+    <br>
+    <hr> 
+    <h1>MÉTODO DENTRO DE MÉTODO</h1>
+    <p>O this possui acesso aos métodos também.</p> 
+    <p>{{preco}}</p>
+    <button @click="adicionarCupom">Adicionar Cupom</button>
+    <p>{{alerta}}</p>
+
+  </div>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        contador: 0,
+        compra: '',
+        preco: 149,
+        alerta: '',
+      },
+      methods: {
+        incrementar: function () {
+          this.contador++;
+        },
+        // sintaxe curta ES6
+        diminuir() {
+          this.contador--;
+        },
+        mudarCompra(instrumento) {
+          this.compra = instrumento;
+        },
+        adicionarCupom() {
+          this.preco *= 0.9;
+          this.alertaCupom();
+        },
+        alertaCupom() {
+          this.alerta = 'Cupom Adicionado';
+        },
+    },
+});
+
+  </script>
+
+</body>
+
+</html>

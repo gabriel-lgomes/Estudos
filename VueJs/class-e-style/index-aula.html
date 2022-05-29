@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class e Style</title>
+
+  <style>
+    .ativo {
+      display: block;
+    }
+
+    .grid-6 {
+      width: 600px;
+    }
+
+    .azul {
+      background: blue;
+    }
+    .ativo {
+      background: tomato;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div id="app">
+    <h1>:CLASS E OBJETOS </h1>
+    <p>Podemos passar objetos no :class, a propriedade que tiver valor true será adicionada como classe.</p>
+    <p :class="{ ativo: estaAtivo, cor: possuiCor }">Texto Ativo</p>
+    <button @click="estaAtivo = !estaAtivo">Ativar / Desativar</button>
+
+    <hr style="margin: 20px 0;">
+    <h1>:CLASS E ARRAY </h1>
+    <p>Array's devem ser utilizadas quando precisamos passar mais de um classe. </p>
+    <p :class="[grid, cor]">Texto Ativo</p>
+
+    <hr style="margin: 20px 0;">
+    <h1>:STYLE</h1>
+    <p>É possível passar um objeto com os estilos, quase como fazemos com CSS direto. Utilizar camelCase, ao invés de
+      font-size use fontSize, até dá para usar font-size mas teria que ser entre aspas</p>
+
+    <p :style="{background: bgColor, color: textColor, fontSize: tamanho + 'px'}">
+      Texto Ativo
+    </p>
+    <button @click="tamanho++">Aumentar</button>
+
+    <hr style="margin: 20px 0;">
+    <h1>:STYLE E OBJETOS </h1>
+    <p>O objeto não precisa ser escrito diretamente no style.</p>
+    <p :style="estiloBotao">Texto Ativo</p>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        estaAtivo: true,
+        possuiCor: false,
+        grid: "grid-6",
+        cor: "azul",
+        bgColor: "tomato",
+        textColor: "#fff",
+        tamanho: 20,
+        estiloBotao: {
+          background: "tomato",
+          color: "#fff",
+          fontSize: "20px"
+        }
+
+      }, 
+    });
+  </script>
+
+</body>
+
+</html>
