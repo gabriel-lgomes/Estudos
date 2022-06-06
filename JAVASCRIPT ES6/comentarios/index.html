@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script defer src="./script.js"></script>
+</head>
+
+<body>
+
+    <form action="">
+        <label for="nome">Nome</label> <br>
+        <input type="text" name="nome">
+        
+        <br>
+        <label for="mensagem">Comentário</label> <br>
+        <textarea name="mensagem" id="" cols="30" rows="10"></textarea> <br>
+
+        <button class="cta-submit" type="submit">
+            Enviar
+        </button>
+    </form>
+    <p class="error" style="background: red; color: white; font-size: 1rem; padding: 1rem; display: none;">Formulário incompleto.</p>
+    <br>
+    <hr>
+    <h1>
+        Comentários
+    </h1>
+    
+
+    <div class="comentarios">
+
+    </div>
+
+    <script>
+        const nomeUsuario = document.querySelector('input[name="nome"]');
+        const comentarioUsuario = document.querySelector('textarea');
+        const divComentarios = document.querySelector('.comentarios'); 
+        const button = document.querySelector('button');
+        const error = document.querySelector('.error');
+        const comentarios = [];  
+
+
+
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            if(nomeUsuario.value.length > 0 && comentarioUsuario.value.length > 0) {
+                comentarios.push({
+                    nome: nomeUsuario.value,
+                    comentario: comentarioUsuario.value
+                });
+                showComments(comentarios);
+                error.style.display = "none";
+            } else {
+                error.style.display = "block"; 
+            }
+            
+        });
+
+        function showComments(comentarios) {
+            const h4 = document.createElement('h4');
+            const p = document.createElement('p');
+            const btnDel = document.createElement('button');
+            btnDel.classList.add('deletar');
+            btnDel.innerText = 'Deletar'; 
+            comentarios.forEach((comentario, index) => { 
+                h4.innerText = comentario.nome;
+                p.innerText = comentario.comentario;  
+                const divAuthor = document.createElement('div');
+                divAuthor.classList.add('author');
+                divAuthor.append(h4, p, btnDel);
+                divComentarios.append(divAuthor);
+                btnDel.addEventListener('click', function () { 
+                    deleteComments(index);
+                    this.parentNode.remove();
+                }); 
+            });
+            nomeUsuario.value = '';
+            comentarioUsuario.value = '';
+        };
+
+        function deleteComments(index) {
+            comentarios.splice(index, 1); 
+        };
+    </script>
+
+</body>
+
+</html>
