@@ -1,0 +1,39 @@
+{
+  "products": [
+    {
+      "id": 3,
+      "name": "Boné aba reta",
+      "price": 29.9
+    },
+    {
+      "name": "Blusa",
+      "price": "150",
+      "id": 4
+    },
+    {
+      "name": "Casaco",
+      "price": "20",
+      "id": 5
+    },
+    {
+      "name": "Tenis",
+      "price": "250",
+      "id": 6
+    },
+    {
+      "name": "Camisola",
+      "price": "12",
+      "id": 7
+    },
+    {
+      "name": "teste",
+      "price": "123",
+      "id": 8
+    },
+    {
+      "name": "Fone",
+      "price": "50",
+      "id": 9
+    }
+  ]
+}
